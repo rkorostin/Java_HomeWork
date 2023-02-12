@@ -10,7 +10,14 @@ public class task_hw01_01 {
     public static void main(String[] args) {
 
         int n = getNumberByUser("Введите число n: ");
+        int T = TriangularNumberFind(n);
+        System.out.printf("Последовательность треугольного числа %d -> %d", n, T);
 
+    }
+
+    public static int TriangularNumberFind(int num) {
+        int T = num * (num + 1) / 2;
+        return T;
     }
 
     public static int getNumberByUser(String text) {
