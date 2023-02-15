@@ -10,23 +10,23 @@ public class task_hw01_01 {
     public static void main(String[] args) {
 
         int n = getNumberByUser("Введите число n: ");
-        int T = triangularNumberFind(n);
-        System.out.printf("Последовательность треугольного числа %d -> %d", n, T);
+        int t = triangularNumberFind(n);
+        System.out.printf("Последовательность треугольного числа %d -> %d", n, t);
 
     }
 
     public static int triangularNumberFind(int num) {
-        int T = num * (num + 1) / 2;
-        return T;
+        int t = num * (num + 1) / 2;
+        return t;
     }
 
     public static int getNumberByUser(String text) {
         int i;
         while (true) {
-            Scanner sc = new Scanner(System.in); // создаём объект класса Scanner
+            Scanner sc = new Scanner(System.in);
             System.out.print(text);
-            if (sc.hasNextInt()) { // возвращает истинну если с потока ввода можно считать целое число
-                i = sc.nextInt(); // считывает целое число с потока ввода и сохраняем в переменную
+            if (sc.hasNextInt()) { 
+                i = sc.nextInt(); 
                 break;
             } else {
                 System.out.println("Вы ввели не целое число");
