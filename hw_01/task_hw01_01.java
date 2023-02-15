@@ -5,8 +5,6 @@ import java.util.Scanner;
 
 public class task_hw01_01 {
 
-    // private static Scanner input = new Scanner(System.in);
-
     public static void main(String[] args) {
 
         int n = getNumberByUser("Введите число n: ");
@@ -34,5 +32,4 @@ public class task_hw01_01 {
         }
         return i;
     }
-
 }
