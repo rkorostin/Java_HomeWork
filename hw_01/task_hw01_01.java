@@ -5,17 +5,17 @@ import java.util.Scanner;
 
 public class task_hw01_01 {
 
-    private static Scanner input = new Scanner(System.in);
+    // private static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
 
         int n = getNumberByUser("Введите число n: ");
-        int T = TriangularNumberFind(n);
+        int T = triangularNumberFind(n);
         System.out.printf("Последовательность треугольного числа %d -> %d", n, T);
 
     }
 
-    public static int TriangularNumberFind(int num) {
+    public static int triangularNumberFind(int num) {
         int T = num * (num + 1) / 2;
         return T;
     }
