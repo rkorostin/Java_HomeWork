@@ -1,5 +1,4 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,43 +13,38 @@ public class task_power {
 
         String strA = a.toString(a);
         String strB = b.toString(b);
-
         try (FileWriter wfile = new FileWriter("input.txt", false)) {
             wfile.write("a " + strA);
             wfile.append('\n');
             wfile.write("b " + strB);
             wfile.flush();
-            System.out.println("\nДанные записаны в файл input.txt");
+            System.out.println("\nВходные данные записаны в файл input.txt");
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
 
-        FileReader rfile = new FileReader("input.txt");
-        int c;
-        while ((c = rfile.read()) != -1) {
-            char ch = (char) c;
-            if (ch == '\n') {
-                System.out.print(ch);
-            } else {
-                System.out.print(ch);
-            }
-        }
+        outputTerminal("input.txt");
 
-        int newA = readFile()[0];
-        int newB = readFile()[1];
+        int newA = readFile("input.txt")[0];
+        int newB = readFile("input.txt")[1];
+
         Double intResult = power(newA, newB);
-        String strResult = intResult.toString(intResult);
 
+        String strResult = intResult.toString(intResult);
         try (FileWriter wfile = new FileWriter("output.txt", false)) {
             wfile.write(strResult);
             wfile.flush();
+            System.out.println("\nРезультат записан в файл output.txt");
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
+
+        outputTerminal("output.txt");
     }
 
-    public static int[] readFile() throws Exception {
-        Scanner scanner = new Scanner(new File("input.txt"));
+    // Чтение цифр из файла
+    public static int[] readFile(String fileName) throws Exception {
+        Scanner scanner = new Scanner(new File(fileName));
         int[] intArr = new int[2];
         String line = scanner.nextLine();
         String[] strArr = line.split(" ");
@@ -58,12 +52,13 @@ public class task_power {
         intArr[0] = a;
         line = scanner.nextLine();
         strArr = line.split(" ");
-        a = Integer.parseInt(strArr[1]);
-        intArr[1] = a;
+        int b = Integer.parseInt(strArr[1]);
+        intArr[1] = b;
         scanner.close();
         return intArr;
     }
 
+    // Получение данных от пользователя
     public static int getNumberByUser(String text) {
         int i;
         while (true) {
@@ -79,15 +74,7 @@ public class task_power {
         return i;
     }
 
-    public static void writeFile(String string) throws FileNotFoundException {
-        try (FileWriter wfile = new FileWriter("output.txt", false)) {
-            wfile.write("line 1");
-            wfile.flush();
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
-
+    // Возведение в степень
     public static double power(int value, int powValue) {
         double result = 1;
         if (powValue > 0) {
@@ -95,16 +82,28 @@ public class task_power {
                 result *= value;
             }
             return result;
-        } 
-        else if (powValue < 0) {
+        } else if (powValue < 0) {
             for (int i = -1; i > powValue; i--) {
-                result *= value;    
+                result *= value;
             }
             result = 1 / (result * value);
             return result;
-        } 
-        else {
+        } else {
             return value;
+        }
+    }
+
+    // Чтение из файла и вывод в терминал
+    public static void outputTerminal(String text) throws Exception {
+        FileReader rfile = new FileReader(text);
+        int c;
+        while ((c = rfile.read()) != -1) {
+            char ch = (char) c;
+            if (ch == '\n') {
+                System.out.print(ch);
+            } else {
+                System.out.print(ch);
+            }
         }
     }
 }
