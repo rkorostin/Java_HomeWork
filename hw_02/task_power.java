@@ -89,7 +89,7 @@ public class task_power {
             result = 1 / (result * value);
             return result;
         } else {
-            return value;
+            return 1;
         }
     }
 
