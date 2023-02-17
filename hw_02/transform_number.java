@@ -10,7 +10,7 @@ public class transform_number {
     }
 
     // transformNumAinB - кол-во вариантов преобразования числа а в число b.
-    // Через рекурсию
+    // Через рекурсию. При b > 500 будет сложновато посчитать...
     public static int transformNumAinB(int a, int b) {
         if (a == b) {
             return 1;
@@ -28,11 +28,7 @@ public class transform_number {
             System.out.print(text);
             if (sc.hasNextInt()) {
                 i = sc.nextInt();
-                if (i <= 0) {
-                    System.out.println("Работаем только с положительными числами");
-                } else {
-                    break;
-                }
+                break;
             } else {
                 System.out.println("Вы ввели не целое число");
             }
