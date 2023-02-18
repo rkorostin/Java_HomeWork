@@ -10,9 +10,10 @@ public class task_power {
         Integer b = getNumberByUser("Введите число b: ");
         System.out.println("Число " + a + " в степени " + b + " -> " + power(a, b));
         String pathInput = "input.txt";
+        String pathOutput = "output.txt";
         writeArgsInFile(a, b, pathInput);
 
-        outputTerminal("input.txt");
+        outputTerminal(pathInput);
         int[] argAB = readFile(pathInput); //  получаем массив с переменными а и b
         int newA = argAB[0];
         int newB = argAB[1];
@@ -28,7 +29,7 @@ public class task_power {
             System.out.println(ex.getMessage());
         }
 
-        outputTerminal("output.txt");
+        outputTerminal(pathOutput);
     }
     public static void writeArgsInFile(int a, int b, String path) {
         String strA = String.valueOf(a);
