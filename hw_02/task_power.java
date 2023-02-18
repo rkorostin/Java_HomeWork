@@ -96,17 +96,13 @@ public class task_power {
         }
     }
 
-    // Чтение из файла и вывод в терминал
     public static void outputTerminal(String text) throws Exception {
         FileReader rfile = new FileReader(text);
-        int c;
-        while ((c = rfile.read()) != -1) {
-            char ch = (char) c;
-            if (ch == '\n') {
-                System.out.print(ch);
-            } else {
-                System.out.print(ch);
-            }
+        File f = new File(text);
+        Scanner scan = new Scanner(f);
+        while (scan.hasNextLine()) {
+            String msg = scan.nextLine();
+            System.out.println(msg);
         }
     }
 }
