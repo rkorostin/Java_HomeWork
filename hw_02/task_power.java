@@ -11,7 +11,8 @@ public class task_power {
         System.out.println("Число " + a + " в степени " + b + " -> " + power(a, b));
         String pathInput = "input.txt";
         String pathOutput = "output.txt";
-        writeArgsInFile(a, b, pathInput);
+        String saveStr = String.format("a %d\nb %d", a, b);
+        writeInFile(saveStr, pathInput);
 
         outputTerminal(pathInput);
         int[] argAB = readFile(pathInput); //  получаем массив с переменными а и b
@@ -31,13 +32,9 @@ public class task_power {
 
         outputTerminal(pathOutput);
     }
-    public static void writeArgsInFile(int a, int b, String path) {
-        String strA = String.valueOf(a);
-        String strB = String.valueOf(b);
+    public static void writeInFile(String data, String path) {
         try (FileWriter wfile = new FileWriter(path, false)) {
-            wfile.write("a " + strA);
-            wfile.append('\n');
-            wfile.write("b " + strB);
+            wfile.write(data);
             wfile.flush();
             System.out.println("\nВходные данные записаны в файл input.txt");
         } catch (IOException ex) {
