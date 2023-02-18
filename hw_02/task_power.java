@@ -13,6 +13,7 @@ public class task_power {
         String pathOutput = "output.txt";
         String saveStr = String.format("a %d\nb %d", a, b);
         writeInFile(saveStr, pathInput);
+        System.out.println("\nВходные данные записаны в файл input.txt");
 
         outputTerminal(pathInput);
         int[] argAB = readFile(pathInput); //  получаем массив с переменными а и b
@@ -21,22 +22,17 @@ public class task_power {
 
         Double intResult = power(newA, newB);
 
-        String strResult = intResult.toString(intResult);
-        try (FileWriter wfile = new FileWriter("output.txt", false)) {
-            wfile.write(strResult);
-            wfile.flush();
-            System.out.println("\nРезультат записан в файл output.txt");
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-
+        saveStr = String.valueOf(intResult);
+        writeInFile(saveStr, pathOutput);
+        System.out.println("\nРезультат записан в файл output.txt");
         outputTerminal(pathOutput);
     }
+
+    // запись в файл
     public static void writeInFile(String data, String path) {
         try (FileWriter wfile = new FileWriter(path, false)) {
             wfile.write(data);
             wfile.flush();
-            System.out.println("\nВходные данные записаны в файл input.txt");
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
@@ -94,6 +90,7 @@ public class task_power {
         }
     }
 
+    // Чтение из файла и вывод в терминал
     public static void outputTerminal(String text) throws Exception {
         FileReader rfile = new FileReader(text);
         File f = new File(text);
@@ -104,3 +101,4 @@ public class task_power {
         }
     }
 }
+
