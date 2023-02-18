@@ -20,9 +20,13 @@ public class task_power {
         int newA = argAB[0];
         int newB = argAB[1];
 
-        Double intResult = power(newA, newB);
-
-        saveStr = String.valueOf(intResult);
+        if (a ==0 && b == 0) {
+            saveStr = "не определено";
+        }
+        else {
+            Double intResult = power(newA, newB);
+            saveStr = String.valueOf(intResult);
+        }
         writeInFile(saveStr, pathOutput);
         System.out.println("\nРезультат записан в файл output.txt");
         outputTerminal(pathOutput);
