@@ -16,7 +16,7 @@ public class task_power {
         System.out.printf("\nВходные данные записаны в файл %s\n", pathInput);
 
         outputTerminal(pathInput);
-        int[] argAB = readFile(pathInput); //  получаем массив с переменными а и b
+        int[] argAB = readFile(pathInput, "a", "b"); //  получаем массив с переменными а и b
         int newA = argAB[0];
         int newB = argAB[1];
 
@@ -43,19 +43,21 @@ public class task_power {
     }
 
     // Чтение цифр из файла
-    public static int[] readFile(String fileName) throws Exception {
-        Scanner scanner = new Scanner(new File(fileName));
+    public static int[] readFile(String fileName, String a, String b) throws Exception {
+        Scanner scan = new Scanner(new File(fileName));
         int[] intArr = new int[2];
         int index = 0;
-
-        // цикл работает пока следующая строка не пустая.
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
+        while (scan.hasNextLine()) {
+            String line = scan.nextLine();
             String[] strArr = line.split(" ");
-            intArr[index] = Integer.parseInt(strArr[1]);
+            if (a.equalsIgnoreCase(strArr[0])) {
+                intArr[0] = Integer.parseInt(strArr[1]);
+            } else if (b.equalsIgnoreCase(strArr[0])) {
+                intArr[1] = Integer.parseInt(strArr[1]);
+            }
             index++;
         }
-        scanner.close();
+        scan.close();
         return intArr;
     }
 
