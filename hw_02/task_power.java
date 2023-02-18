@@ -13,7 +13,7 @@ public class task_power {
         String pathOutput = "output.txt";
         String saveStr = String.format("a %d\nb %d", a, b);
         writeInFile(saveStr, pathInput);
-        System.out.println("\nВходные данные записаны в файл input.txt");
+        System.out.printf("\nВходные данные записаны в файл %s\n", pathInput);
 
         outputTerminal(pathInput);
         int[] argAB = readFile(pathInput); //  получаем массив с переменными а и b
@@ -28,7 +28,7 @@ public class task_power {
             saveStr = String.valueOf(intResult);
         }
         writeInFile(saveStr, pathOutput);
-        System.out.println("\nРезультат записан в файл output.txt");
+        System.out.printf("\nРезультат записан в файл %s\n", pathOutput);
         outputTerminal(pathOutput);
     }
 
@@ -96,7 +96,6 @@ public class task_power {
 
     // Чтение из файла и вывод в терминал
     public static void outputTerminal(String text) throws Exception {
-        FileReader rfile = new FileReader(text);
         File f = new File(text);
         Scanner scan = new Scanner(f);
         while (scan.hasNextLine()) {
