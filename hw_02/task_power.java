@@ -8,53 +8,56 @@ public class task_power {
     public static void main(String[] args) throws Exception {
         Integer a = getNumberByUser("Введите число а: ");
         Integer b = getNumberByUser("Введите число b: ");
-
         System.out.println("Число " + a + " в степени " + b + " -> " + power(a, b));
+        String pathInput = "input.txt";
+        String pathOutput = "output.txt";
+        String saveStr = String.format("a %d\nb %d", a, b);
+        writeInFile(saveStr, pathInput);
+        System.out.printf("\nВходные данные записаны в файл %s\n", pathInput);
 
-        String strA = a.toString(a);
-        String strB = b.toString(b);
-        try (FileWriter wfile = new FileWriter("input.txt", false)) {
-            wfile.write("a " + strA);
-            wfile.append('\n');
-            wfile.write("b " + strB);
+        outputTerminal(pathInput);
+        int[] argAB = readFile(pathInput, "a", "b"); //  получаем массив с переменными а и b
+        int newA = argAB[0];
+        int newB = argAB[1];
+
+        if (a ==0 && b == 0) {
+            saveStr = "не определено";
+        }
+        else {
+            Double intResult = power(newA, newB);
+            saveStr = String.valueOf(intResult);
+        }
+        writeInFile(saveStr, pathOutput);
+        System.out.printf("\nРезультат записан в файл %s\n", pathOutput);
+        outputTerminal(pathOutput);
+    }
+
+    // запись в файл
+    public static void writeInFile(String data, String path) {
+        try (FileWriter wfile = new FileWriter(path, false)) {
+            wfile.write(data);
             wfile.flush();
-            System.out.println("\nВходные данные записаны в файл input.txt");
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-
-        outputTerminal("input.txt");
-
-        int newA = readFile("input.txt")[0];
-        int newB = readFile("input.txt")[1];
-
-        Double intResult = power(newA, newB);
-
-        String strResult = intResult.toString(intResult);
-        try (FileWriter wfile = new FileWriter("output.txt", false)) {
-            wfile.write(strResult);
-            wfile.flush();
-            System.out.println("\nРезультат записан в файл output.txt");
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-        outputTerminal("output.txt");
     }
 
     // Чтение цифр из файла
-    public static int[] readFile(String fileName) throws Exception {
-        Scanner scanner = new Scanner(new File(fileName));
+    public static int[] readFile(String fileName, String a, String b) throws Exception {
+        Scanner scan = new Scanner(new File(fileName));
         int[] intArr = new int[2];
-        String line = scanner.nextLine();
-        String[] strArr = line.split(" ");
-        int a = Integer.parseInt(strArr[1]);
-        intArr[0] = a;
-        line = scanner.nextLine();
-        strArr = line.split(" ");
-        int b = Integer.parseInt(strArr[1]);
-        intArr[1] = b;
-        scanner.close();
+        int index = 0;
+        while (scan.hasNextLine()) {
+            String line = scan.nextLine();
+            String[] strArr = line.split(" ");
+            if (a.equalsIgnoreCase(strArr[0])) {
+                intArr[0] = Integer.parseInt(strArr[1]);
+            } else if (b.equalsIgnoreCase(strArr[0])) {
+                intArr[1] = Integer.parseInt(strArr[1]);
+            }
+            index++;
+        }
+        scan.close();
         return intArr;
     }
 
@@ -95,15 +98,12 @@ public class task_power {
 
     // Чтение из файла и вывод в терминал
     public static void outputTerminal(String text) throws Exception {
-        FileReader rfile = new FileReader(text);
-        int c;
-        while ((c = rfile.read()) != -1) {
-            char ch = (char) c;
-            if (ch == '\n') {
-                System.out.print(ch);
-            } else {
-                System.out.print(ch);
-            }
+        File f = new File(text);
+        Scanner scan = new Scanner(f);
+        while (scan.hasNextLine()) {
+            String msg = scan.nextLine();
+            System.out.println(msg);
         }
     }
 }
+
