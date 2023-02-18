@@ -8,25 +8,14 @@ public class task_power {
     public static void main(String[] args) throws Exception {
         Integer a = getNumberByUser("Введите число а: ");
         Integer b = getNumberByUser("Введите число b: ");
-
         System.out.println("Число " + a + " в степени " + b + " -> " + power(a, b));
-
-        String strA = a.toString(a);
-        String strB = b.toString(b);
-        try (FileWriter wfile = new FileWriter("input.txt", false)) {
-            wfile.write("a " + strA);
-            wfile.append('\n');
-            wfile.write("b " + strB);
-            wfile.flush();
-            System.out.println("\nВходные данные записаны в файл input.txt");
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
+        String pathInput = "input.txt";
+        writeArgsInFile(a, b, pathInput);
 
         outputTerminal("input.txt");
-
-        int newA = readFile("input.txt")[0];
-        int newB = readFile("input.txt")[1];
+        int[] argAB = readFile(pathInput); //  получаем массив с переменными а и b
+        int newA = argAB[0];
+        int newB = argAB[1];
 
         Double intResult = power(newA, newB);
 
@@ -41,19 +30,33 @@ public class task_power {
 
         outputTerminal("output.txt");
     }
+    public static void writeArgsInFile(int a, int b, String path) {
+        String strA = String.valueOf(a);
+        String strB = String.valueOf(b);
+        try (FileWriter wfile = new FileWriter(path, false)) {
+            wfile.write("a " + strA);
+            wfile.append('\n');
+            wfile.write("b " + strB);
+            wfile.flush();
+            System.out.println("\nВходные данные записаны в файл input.txt");
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 
     // Чтение цифр из файла
     public static int[] readFile(String fileName) throws Exception {
         Scanner scanner = new Scanner(new File(fileName));
         int[] intArr = new int[2];
-        String line = scanner.nextLine();
-        String[] strArr = line.split(" ");
-        int a = Integer.parseInt(strArr[1]);
-        intArr[0] = a;
-        line = scanner.nextLine();
-        strArr = line.split(" ");
-        int b = Integer.parseInt(strArr[1]);
-        intArr[1] = b;
+        int index = 0;
+
+        // цикл работает пока следующая строка не пустая.
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            String[] strArr = line.split(" ");
+            intArr[index] = Integer.parseInt(strArr[1]);
+            index++;
+        }
         scanner.close();
         return intArr;
     }
