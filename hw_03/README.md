@@ -3,4 +3,4 @@
 1.Список делится на две части, далее каждая из них делится ещё на две и так далее, пока не останутся единичные элементы. Массив из одного элемента считается упорядоченным.
 
 2.Соседние элементы сравниваются и соединяются вместе. Так происходит до тех пор, пока все элементы не будут отсортированы.
-![FillSecondArray](https://github.com/rkorostin/Images/blob/6d2f45b163ac15f9c0c4f6fc006b6e6d40efdead/FillSecondArray.png)
+![illustrationOfSorting](https://github.com/rkorostin/Images/blob/main/illustrationOfSorting_640_480.gif)
