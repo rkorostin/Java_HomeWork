@@ -2,7 +2,7 @@ import java.util.stream.IntStream;
 
 public class HeapSort {
     public static void main(String args[]) {
-        int[] arr = fillArray(10, 100);
+        int[] arr = fillArray(1000, 100);
         System.out.println("Изначальный массив: ");
         printArray(arr);
 
@@ -13,7 +13,6 @@ public class HeapSort {
         printArray(arr);
     }
 
-    // рандомное заполнение массива
     public static int[] fillArray(int size, int range) {
         int[] array = new int[size];
         IntStream.range(0, size)
@@ -21,13 +20,15 @@ public class HeapSort {
         return array;
     }
 
-    public static void sort(int arr[]) {
-        // Построение кучи
-        for (int i = arr.length / 2 - 1; i >= 0; i--)
-            heapify(arr, arr.length, i);
+    public void sort(int arr[]) {
+        int n = arr.length;
+
+        // Построение кучи (перегруппируем массив)
+        for (int i = n / 2 - 1; i >= 0; i--)
+            heapify(arr, n, i);
 
         // Один за другим извлекаем элементы из кучи
-        for (int i = arr.length - 1; i >= 0; i--) {
+        for (int i = n - 1; i >= 0; i--) {
             // Перемещаем текущий корень в конец
             int temp = arr[0];
             arr[0] = arr[i];
@@ -40,32 +41,32 @@ public class HeapSort {
 
     // Преобразование в двоичную кучу поддерева с корневым узлом i,
     // что является индексом в arr[]. n - размер кучи
-    public static void heapify(int arr[], int length, int i) {
-        
-        int largest = i; // Инициализируем наибольший элемент как корень
+    void heapify(int arr[], int n, int i) {
+        int maxElement = i; // Инициализируем наибольший элемент как корень
         int l = 2 * i + 1; // левый = 2*i + 1
         int r = 2 * i + 2; // правый = 2*i + 2
 
         // Если левый дочерний элемент больше корня
-        if (l < arr.length && arr[l] > arr[largest])
-            largest = l;
+        if (l < n && arr[l] > arr[maxElement])
+            maxElement = l;
 
-        // Если правый дочерний элемент больше, чем самый большой элемент на данный момент
-        if (r < arr.length && arr[r] > arr[largest])
-            largest = r;
+        // Если правый дочерний элемент больше, чем самый большой элемент на данный
+        // момент
+        if (r < n && arr[r] > arr[maxElement])
+            maxElement = r;
         // Если самый большой элемент не корень
-        if (largest != i) {
+        if (maxElement != i) {
             int swap = arr[i];
-            arr[i] = arr[largest];
-            arr[largest] = swap;
+            arr[i] = arr[maxElement];
+            arr[maxElement] = swap;
 
             // Рекурсивно преобразуем в двоичную кучу затронутое поддерево
-            heapify(arr, arr.length, largest);
+            heapify(arr, n, maxElement);
         }
     }
 
     // вывод на экран массива
-    public static void printArray(int arr[]) {
+    static void printArray(int arr[]) {
         for (int i = 0; i < arr.length; ++i)
             System.out.print(arr[i] + " ");
         System.out.println();
