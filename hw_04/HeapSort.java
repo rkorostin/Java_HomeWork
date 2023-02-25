@@ -1,9 +1,6 @@
-import java.util.Arrays;
 import java.util.stream.IntStream;
 
-// Реализация пирамидальной сортировки на Java
 public class HeapSort {
-    // Управляющая программа
     public static void main(String args[]) {
         int[] arr = fillArray(10, 100);
         System.out.println("Изначальный массив: ");
@@ -16,6 +13,7 @@ public class HeapSort {
         printArray(arr);
     }
 
+    // рандомное заполнение массива
     public static int[] fillArray(int size, int range) {
         int[] array = new int[size];
         IntStream.range(0, size)
@@ -23,7 +21,7 @@ public class HeapSort {
         return array;
     }
 
-    public void sort(int arr[]) {
+    public static void sort(int arr[]) {
         // Построение кучи
         for (int i = arr.length / 2 - 1; i >= 0; i--)
             heapify(arr, arr.length, i);
@@ -42,7 +40,7 @@ public class HeapSort {
 
     // Преобразование в двоичную кучу поддерева с корневым узлом i,
     // что является индексом в arr[]. n - размер кучи
-    void heapify(int arr[], int length, int i) {
+    public static void heapify(int arr[], int length, int i) {
         
         int largest = i; // Инициализируем наибольший элемент как корень
         int l = 2 * i + 1; // левый = 2*i + 1
@@ -67,7 +65,7 @@ public class HeapSort {
     }
 
     // вывод на экран массива
-    static void printArray(int arr[]) {
+    public static void printArray(int arr[]) {
         for (int i = 0; i < arr.length; ++i)
             System.out.print(arr[i] + " ");
         System.out.println();
