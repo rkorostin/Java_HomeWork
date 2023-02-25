@@ -2,15 +2,15 @@ import java.util.stream.IntStream;
 
 public class HeapSort {
     public static void main(String args[]) {
-        int[] arr = fillArray(1000, 100);
+        int[] arr = fillArray(10, 100);
         System.out.println("Изначальный массив: ");
-        printArray(arr);
+        printArray(arr); // 11 60 20 -72 -79 18 -81 43 54 -96
 
         HeapSort hs = new HeapSort();
         hs.sort(arr);
 
         System.out.println("Отсортированный массив: ");
-        printArray(arr);
+        printArray(arr); // -96 -81 -79 -72 11 18 20 43 54 60
     }
 
     public static int[] fillArray(int size, int range) {
