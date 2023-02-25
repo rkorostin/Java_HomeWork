@@ -11,3 +11,6 @@
 3. Преобразовываем полученное дерево в max-heap с новым корнем.
 4. Повторяем шаг 2, шаг 3, пока размер кучи больше 1.
 5. Размер кучи равен 1 - конец алгоритма
+
+
+![illustrationOfHeapSort](https://github.com/rkorostin/Images/blob/main/illustrationOfHeapSort.gif)
